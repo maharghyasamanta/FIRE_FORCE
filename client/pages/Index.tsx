@@ -74,7 +74,7 @@ export default function Index() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "url(https://akm-img-a-in.tosshub.com/indiatoday/images/photogallery/202201/Himveers_7_IT_1643179360122.PNG?VersionId=lhlJs2rSubV6CV9v1iU5JPjKW_p9cvPh&size=686:*)",
+            backgroundImage: "url(https://i.pinimg.com/originals/cd/37/aa/cd37aab269f2da80c976302cb4a707f8.gif)",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
