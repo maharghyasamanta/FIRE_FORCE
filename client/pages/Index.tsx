@@ -70,8 +70,16 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-12 md:pt-20 pb-12 md:pb-24">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
+        {/* Background image */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url(https://akm-img-a-in.tosshub.com/indiatoday/images/photogallery/202201/Himveers_7_IT_1643179360122.PNG?VersionId=lhlJs2rSubV6CV9v1iU5JPjKW_p9cvPh&size=686:*)",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
