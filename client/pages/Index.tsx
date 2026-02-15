@@ -83,8 +83,8 @@ export default function Index() {
               </div>
 
               <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4">
-                  Stay Safe with <span className="text-primary">Real-time</span> Fire Alerts
+                <h1 className="flex flex-col justify-start items-start text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4">
+                  Stay Safe with <span className="inline text-primary font-bold">Real-time</span> Fire Alerts
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
                   Get instant notifications about fire emergencies in your area. Our advanced alert system provides critical information when seconds matter most.
