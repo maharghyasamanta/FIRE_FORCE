@@ -61,7 +61,7 @@ export default function Index() {
     { label: "Active Alerts", value: "24/7" },
     { label: "Response Time", value: "<5 min" },
     { label: "Coverage Area", value: "150+ km²" },
-    { label: "Alert Subscribers", value: "50K+" },
+    { label: "Alert Subscribers", value: "PROTOTYPE-1" },
   ];
 
   return (
@@ -117,7 +117,7 @@ export default function Index() {
               <div className="flex flex-wrap gap-4 pt-4">
                 {stats.map((stat, idx) => (
                   <div key={idx} className="flex flex-col">
-                    <span className="text-2xl font-bold text-primary">{stat.value}</span>
+                    <span className="text-xl font-bold text-primary">{stat.value}</span>
                     <span className="text-xs text-muted-foreground">{stat.label}</span>
                   </div>
                 ))}
