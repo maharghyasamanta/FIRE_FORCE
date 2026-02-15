@@ -31,6 +31,13 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <Button
             asChild
+            variant="ghost"
+            className="hidden sm:inline-flex text-foreground hover:text-primary"
+          >
+            <Link to="/login">Sign In</Link>
+          </Button>
+          <Button
+            asChild
             variant="outline"
             className="hidden sm:inline-flex"
           >
