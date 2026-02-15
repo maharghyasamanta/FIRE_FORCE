@@ -39,7 +39,16 @@ const App = () => (
   </QueryClientProvider>
 );
 
+declare global {
+  interface Window {
+    __REACT_ROOT__?: ReturnType<typeof createRoot>;
+  }
+}
+
 const container = document.getElementById("root");
-if (container && !container.hasChildNodes()) {
-  createRoot(container).render(<App />);
+if (container) {
+  if (!window.__REACT_ROOT__) {
+    window.__REACT_ROOT__ = createRoot(container);
+  }
+  window.__REACT_ROOT__.render(<App />);
 }
