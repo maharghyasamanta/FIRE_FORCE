@@ -216,8 +216,9 @@ export default function Index() {
                 className="bg-card rounded-lg border border-border p-6"
                 style={{
                   width: "800px",
-                  height: "1000px",
-                  overflow: "auto",
+                  height: "800px",
+                  overflowX: "auto",
+                  overflowY: "auto",
                 }}
               >
                 <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
