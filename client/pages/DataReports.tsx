@@ -31,29 +31,66 @@ export default function DataReports() {
 
   const sensorComparison = [
     {
-      sensor: "Temp °C",
+      sensor: "Temperature (°C)",
       sector_a: 45,
       sector_b: 38,
       sector_c: 32,
     },
     {
-      sensor: "Humidity %",
+      sensor: "Humidity (%)",
       sector_a: 15,
       sector_b: 22,
       sector_c: 35,
     },
     {
-      sensor: "Wind km/h",
-      sector_a: 28,
-      sector_b: 22,
-      sector_c: 18,
+      sensor: "IR Sensor (Kelvin)",
+      sector_a: 2450,
+      sector_b: 1850,
+      sector_c: 1200,
     },
     {
-      sensor: "AQI",
+      sensor: "Gas Sensor (ppm)",
       sector_a: 850,
       sector_b: 620,
       sector_c: 410,
     },
+  ];
+
+  // Individual Sensor Data Sections
+  const gpsSensorData = [
+    { time: "00:00", lat: 40.7128, lon: -74.0060 },
+    { time: "02:00", lat: 40.7135, lon: -74.0065 },
+    { time: "04:00", lat: 40.7142, lon: -74.0070 },
+    { time: "06:00", lat: 40.7155, lon: -74.0080 },
+    { time: "08:00", lat: 40.7168, lon: -74.0095 },
+    { time: "10:00", lat: 40.7180, lon: -74.0105 },
+  ];
+
+  const irSensorData = [
+    { time: "00:00", ir_a: 1200, ir_b: 900, ir_c: 800 },
+    { time: "02:00", ir_a: 1400, ir_b: 1050, ir_c: 850 },
+    { time: "04:00", ir_a: 1800, ir_b: 1350, ir_c: 950 },
+    { time: "06:00", ir_a: 2100, ir_b: 1650, ir_c: 1100 },
+    { time: "08:00", ir_a: 2350, ir_b: 1800, ir_c: 1200 },
+    { time: "10:00", ir_a: 2450, ir_b: 1850, ir_c: 1200 },
+  ];
+
+  const flameSensorData = [
+    { time: "00:00", flame_a: 0, flame_b: 0, flame_c: 0 },
+    { time: "02:00", flame_a: 15, flame_b: 5, flame_c: 0 },
+    { time: "04:00", flame_a: 45, flame_b: 20, flame_c: 5 },
+    { time: "06:00", flame_a: 78, flame_b: 45, flame_c: 12 },
+    { time: "08:00", flame_a: 88, flame_b: 60, flame_c: 18 },
+    { time: "10:00", flame_a: 98.5, flame_b: 67.3, flame_c: 22.1 },
+  ];
+
+  const gasSensorData = [
+    { time: "00:00", gas_a: 100, gas_b: 80, gas_c: 50 },
+    { time: "02:00", gas_a: 200, gas_b: 120, gas_c: 70 },
+    { time: "04:00", gas_a: 350, gas_b: 250, gas_c: 150 },
+    { time: "06:00", gas_a: 550, gas_b: 400, gas_c: 250 },
+    { time: "08:00", gas_a: 700, gas_b: 520, gas_c: 320 },
+    { time: "10:00", gas_a: 850, gas_b: 620, gas_c: 410 },
   ];
 
   const fireLocations = [
@@ -255,7 +292,7 @@ export default function DataReports() {
           <div className="bg-card p-6 rounded-lg border border-border">
             <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
               <Radio size={24} className="text-primary" />
-              Sensor Data by Sector
+              Multi-Sensor Comparison by Sector
             </h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={sensorComparison}>
@@ -273,6 +310,81 @@ export default function DataReports() {
                 <Bar dataKey="sector_b" fill="#f78000" name="Sector B (Secondary)" />
                 <Bar dataKey="sector_c" fill="#90ee90" name="Sector C (Perimeter)" />
               </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* IR Sensor Data Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <Eye size={24} className="text-primary" />
+              IR Sensor (Infrared) - Thermal Detection (Kelvin)
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={irSensorData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="time" stroke="#717171" />
+                <YAxis stroke="#717171" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e5e5",
+                  }}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="ir_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                <Line type="monotone" dataKey="ir_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                <Line type="monotone" dataKey="ir_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Flame Sensor Data Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <Flame size={24} className="text-primary" />
+              Flame Sensor - Fire Detection Confidence (%)
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={flameSensorData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="time" stroke="#717171" />
+                <YAxis stroke="#717171" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e5e5",
+                  }}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="flame_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                <Line type="monotone" dataKey="flame_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                <Line type="monotone" dataKey="flame_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Gas Sensor Data Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <Zap size={24} className="text-primary" />
+              Gas Sensor - Toxic Gas Levels (ppm)
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={gasSensorData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="time" stroke="#717171" />
+                <YAxis stroke="#717171" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e5e5",
+                  }}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="gas_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                <Line type="monotone" dataKey="gas_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                <Line type="monotone" dataKey="gas_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+              </LineChart>
             </ResponsiveContainer>
           </div>
 
