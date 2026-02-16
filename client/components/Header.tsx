@@ -20,6 +20,9 @@ export default function Header() {
           <Link to="/alerts" className="text-foreground hover:text-primary transition-colors">
             Alerts
           </Link>
+          <Link to="/data" className="text-foreground hover:text-primary transition-colors">
+            Data & Reports
+          </Link>
           <Link to="/resources" className="text-foreground hover:text-primary transition-colors">
             Resources
           </Link>

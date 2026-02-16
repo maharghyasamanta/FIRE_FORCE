@@ -5,17 +5,53 @@ import { Button } from "@/components/ui/button";
 import {
   AlertCircle,
   Bell,
+  Thermometer,
+  Wind,
+  Droplet,
+  Radio,
+  Flame,
   MapPin,
   Clock,
-  Shield,
-  Users,
-  Flame,
-  Phone,
-  ArrowRight,
+  Activity,
 } from "lucide-react";
 
 export default function Index() {
-  const activeAlerts = [
+  const sensors = [
+    {
+      id: 1,
+      name: "Temperature",
+      value: "45°C",
+      icon: Thermometer,
+      status: "Critical",
+      location: "Sector A1",
+    },
+    {
+      id: 2,
+      name: "Humidity",
+      value: "15%",
+      icon: Droplet,
+      status: "Low",
+      location: "Sector A1",
+    },
+    {
+      id: 3,
+      name: "Wind Speed",
+      value: "28 km/h",
+      icon: Wind,
+      status: "High",
+      location: "Sector B2",
+    },
+    {
+      id: 4,
+      name: "Smoke Density",
+      value: "850 AQI",
+      icon: Radio,
+      status: "Critical",
+      location: "Sector A1",
+    },
+  ];
+
+  const currentAlerts = [
     {
       id: 1,
       title: "Wildfire Alert",
@@ -23,6 +59,8 @@ export default function Index() {
       severity: "High",
       description: "Active fire spreading rapidly, evacuation recommended",
       distance: "2.5 km away",
+      coordinates: "40.7128°N, 74.0060°W",
+      status: "Active",
     },
     {
       id: 2,
@@ -31,313 +69,236 @@ export default function Index() {
       severity: "Medium",
       description: "Fire department responding to commercial building",
       distance: "5.3 km away",
-    },
-  ];
-
-  const features = [
-    {
-      icon: Bell,
-      title: "Real-time Alerts",
-      description: "Get instant notifications about fire emergencies in your area",
+      coordinates: "40.7580°N, 73.9855°W",
+      status: "Responding",
     },
     {
-      icon: MapPin,
-      title: "Location Tracking",
-      description: "See active fires on an interactive map with detailed information",
+      id: 3,
+      title: "Brush Fire",
+      location: "East Valley",
+      severity: "Medium",
+      description: "Fire contained to brushland, monitoring in progress",
+      distance: "8.1 km away",
+      coordinates: "40.6892°N, 74.1445°W",
+      status: "Contained",
     },
-    {
-      icon: Clock,
-      title: "Response Updates",
-      description: "Monitor emergency response status and estimated arrival times",
-    },
-    {
-      icon: Shield,
-      title: "Safety Resources",
-      description: "Access evacuation guides and fire safety tips from experts",
-    },
-  ];
-
-  const stats = [
-    { label: "Active Alerts", value: "24/7" },
-    { label: "Response Time", value: "<5 min" },
-    { label: "Coverage Area", value: "150+ km²" },
-    { label: "Alert Subscribers", value: "PROTOTYPE-1" },
   ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 md:pt-20 pb-12 md:pb-24">
-        {/* Background image */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url(https://i.pinimg.com/originals/cd/37/aa/cd37aab269f2da80c976302cb4a707f8.gif)",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Left content */}
-            <div className="flex flex-col gap-6">
-              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                <AlertCircle size={16} className="text-primary" />
-                <span className="text-sm text-primary font-medium">Emergency Alert System</span>
-              </div>
-
-              <div>
-                <h1 className="flex flex-col justify-start items-start text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4">
-                  Stay Safe with <span className="inline text-primary font-bold">Real-time</span> Fire Alerts
-                </h1>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Get instant notifications about fire emergencies in your area. Our advanced alert system provides critical information when seconds matter most.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  asChild
-                  className="bg-primary hover:bg-primary/90 text-white"
-                >
-                  <Link to="/emergency" className="flex items-center gap-2">
-                    Emergency Now
-                    <ArrowRight size={20} />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                >
-                  <Link to="/alerts" className="flex items-center gap-2">
-                    View Active Alerts
-                    <Flame size={20} />
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap gap-4 pt-4">
-                {stats.map((stat, idx) => (
-                  <div key={idx} className="flex flex-col">
-                    <span className="text-xl font-bold text-primary">{stat.value}</span>
-                    <span className="text-xs text-muted-foreground">{stat.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right visual */}
-            <div className="hidden md:flex items-center justify-center">
-              <div className="relative w-full aspect-square max-w-md">
-                {/* Animated circle background */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl" />
-                <div className="absolute inset-4 rounded-xl border-2 border-primary/30 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <Flame size={80} className="text-primary mx-auto mb-4 animate-pulse" />
-                    <p className="text-foreground font-semibold">Active Emergency?</p>
-                    <p className="text-muted-foreground text-sm mt-2">Call 911 Immediately</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Active Alerts Section */}
-      <section className="py-12 md:py-20 bg-card border-t border-border">
+      {/* Top Alerts Bar */}
+      <section className="bg-primary/10 border-b-2 border-primary/30 py-4">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Active Alerts in Your Area
-            </h2>
-            <p className="text-muted-foreground">
-              Monitor real-time fire emergencies and safety information
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {activeAlerts.map((alert) => (
+          <div className="flex items-center gap-4 overflow-x-auto pb-2">
+            <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+              <Bell size={18} className="text-primary animate-pulse" />
+              Current Alerts:
+            </div>
+            {currentAlerts.map((alert) => (
               <div
                 key={alert.id}
-                className="p-6 rounded-lg border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent hover:border-primary/50 transition-colors"
+                className="flex-shrink-0 px-4 py-2 bg-card rounded-lg border border-primary/30 hover:border-primary/50 transition-colors cursor-pointer"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Flame size={20} className="text-primary" />
-                      <h3 className="font-semibold text-lg text-foreground">{alert.title}</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground flex items-center gap-2">
-                      <MapPin size={16} />
-                      {alert.location}
-                    </p>
-                  </div>
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary text-white">
-                    {alert.severity}
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`w-2 h-2 rounded-full ${
+                      alert.severity === "High"
+                        ? "bg-red-500 animate-pulse"
+                        : "bg-yellow-500"
+                    }`}
+                  />
+                  <span className="text-xs font-medium text-foreground">
+                    {alert.title}
                   </span>
-                </div>
-
-                <p className="text-foreground mb-4">{alert.description}</p>
-
-                <div className="flex items-center justify-between pt-4 border-t border-primary/20">
-                  <span className="text-sm text-muted-foreground flex items-center gap-2">
-                    <AlertCircle size={16} />
-                    {alert.distance}
-                  </span>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="text-primary hover:text-primary/90"
-                  >
-                    <Link to="/alerts">View Details</Link>
-                  </Button>
+                  <span className="text-xs text-muted-foreground">({alert.status})</span>
                 </div>
               </div>
             ))}
           </div>
-
-          <div className="mt-10 text-center">
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-            >
-              <Link to="/alerts" className="flex items-center gap-2">
-                View All Alerts
-                <ArrowRight size={20} />
-              </Link>
-            </Button>
-          </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-12 md:py-20">
+      {/* Main Content - Two Column Layout */}
+      <section className="flex-1 py-8">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Why Choose FireAlert
-            </h2>
-            <p className="text-muted-foreground">
-              Advanced features designed to keep you informed and safe
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, idx) => {
-              const Icon = feature.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-6 rounded-lg border border-border hover:border-primary/50 hover:bg-card transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Icon size={24} className="text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Emergency Information Section */}
-      <section className="py-12 md:py-20 bg-primary/10 border-t border-primary/20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-card rounded-lg p-8 md:p-12 border-2 border-primary/30">
-              <div className="flex items-center gap-3 mb-4">
-                <AlertCircle size={28} className="text-primary" />
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                  Emergency Contact Information
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* LEFT SIDE - Description & Sensors */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* Description Section */}
+              <div className="bg-card rounded-lg border border-border p-6">
+                <h2 className="text-2xl font-bold text-foreground mb-4">
+                  System Overview
                 </h2>
-              </div>
-
-              <p className="text-muted-foreground mb-8">
-                If you witness a fire or are in immediate danger, take action immediately.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="p-6 bg-background rounded-lg border border-border">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Phone size={24} className="text-primary" />
-                    <h3 className="font-semibold text-lg text-foreground">Call Emergency</h3>
-                  </div>
-                  <p className="text-2xl font-bold text-primary mb-2">911</p>
-                  <p className="text-sm text-muted-foreground">Available 24/7 for emergencies</p>
-                </div>
-
-                <div className="p-6 bg-background rounded-lg border border-border">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Bell size={24} className="text-secondary" />
-                    <h3 className="font-semibold text-lg text-foreground">Get Alerts</h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Enable notifications to receive instant fire alerts
-                  </p>
-                  <Button
-                    asChild
-                    size="sm"
-                    variant="outline"
-                    className="w-full"
-                  >
-                    <Link to="/alerts">Enable Notifications</Link>
-                  </Button>
-                </div>
-              </div>
-
-              <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
-                <p className="text-sm text-foreground">
-                  <strong>Safety Tip:</strong> In case of fire, evacuate immediately. Do not attempt to fight the fire unless you are trained and equipped. Leave belongings behind and focus on getting to safety.
+                <p className="text-muted-foreground mb-4">
+                  FireAlert monitors real-time fire emergencies with advanced sensor networks and rapid response coordination.
                 </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Activity size={20} className="text-primary mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">Real-time Monitoring</h4>
+                      <p className="text-sm text-muted-foreground">24/7 sensor data collection</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Radio size={20} className="text-primary mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">Live Updates</h4>
+                      <p className="text-sm text-muted-foreground">Instant alert notifications</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin size={20} className="text-primary mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">Precise Location</h4>
+                      <p className="text-sm text-muted-foreground">GPS coordinates tracking</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sensors Section */}
+              <div className="bg-card rounded-lg border border-border p-6">
+                <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Thermometer size={20} className="text-primary" />
+                  Active Sensors
+                </h3>
+                <div className="space-y-3">
+                  {sensors.map((sensor) => {
+                    const Icon = sensor.icon;
+                    return (
+                      <div
+                        key={sensor.id}
+                        className="p-3 bg-background rounded-lg border border-border/50"
+                      >
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <Icon size={16} className="text-primary" />
+                            <span className="text-sm font-semibold text-foreground">
+                              {sensor.name}
+                            </span>
+                          </div>
+                          <span
+                            className={`text-xs font-bold px-2 py-1 rounded ${
+                              sensor.status === "Critical"
+                                ? "bg-red-500/20 text-red-600"
+                                : sensor.status === "High"
+                                ? "bg-yellow-500/20 text-yellow-600"
+                                : "bg-green-500/20 text-green-600"
+                            }`}
+                          >
+                            {sensor.status}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-lg font-bold text-primary">
+                            {sensor.value}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {sensor.location}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <Button asChild className="w-full mt-4 bg-primary hover:bg-primary/90">
+                  <Link to="/data">View All Sensor Data</Link>
+                </Button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-12 md:py-20 border-t border-border">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Be Prepared, Stay Safe
-            </h2>
-            <p className="text-muted-foreground mb-8 text-lg">
-              Join thousands of residents who receive critical fire emergency alerts. Protect yourself and your community.
-            </p>
+            {/* RIGHT SIDE - Current Fire Alerts */}
+            <div className="lg:col-span-2">
+              <div className="bg-card rounded-lg border border-border p-6">
+                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                  <Flame size={24} className="text-primary" />
+                  Active Fire Alerts
+                </h2>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                asChild
-                className="bg-primary hover:bg-primary/90 text-white"
-              >
-                <Link to="/emergency" className="flex items-center gap-2">
-                  <Users size={20} />
-                  Join Our Network
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-              >
-                <Link to="/resources" className="flex items-center gap-2">
-                  <Shield size={20} />
-                  Learn Safety Tips
-                </Link>
-              </Button>
+                <div className="space-y-4">
+                  {currentAlerts.map((alert) => (
+                    <div
+                      key={alert.id}
+                      className="p-5 rounded-lg border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent hover:border-primary/50 transition-colors"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className={`w-3 h-3 rounded-full ${
+                                alert.severity === "High"
+                                  ? "bg-red-500 animate-pulse"
+                                  : "bg-yellow-500"
+                              }`}
+                            />
+                            <h3 className="font-semibold text-lg text-foreground">
+                              {alert.title}
+                            </h3>
+                          </div>
+                          <p className="text-sm text-muted-foreground flex items-center gap-2">
+                            <MapPin size={14} />
+                            {alert.location}
+                          </p>
+                        </div>
+                        <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary text-white">
+                          {alert.severity}
+                        </span>
+                      </div>
+
+                      <p className="text-foreground mb-4 text-sm">
+                        {alert.description}
+                      </p>
+
+                      <div className="grid grid-cols-2 gap-3 mb-4 p-3 bg-background rounded-lg">
+                        <div>
+                          <p className="text-xs text-muted-foreground">Status</p>
+                          <p className="font-semibold text-foreground">{alert.status}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">Distance</p>
+                          <p className="font-semibold text-foreground">{alert.distance}</p>
+                        </div>
+                        <div className="col-span-2">
+                          <p className="text-xs text-muted-foreground">Coordinates</p>
+                          <p className="font-mono text-sm text-primary">
+                            {alert.coordinates}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <Button
+                          asChild
+                          size="sm"
+                          className="flex-1 bg-primary hover:bg-primary/90 text-white"
+                        >
+                          <Link to="/emergency" className="flex items-center gap-2">
+                            <Phone size={16} />
+                            Report / Help
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          size="sm"
+                          variant="outline"
+                          className="flex-1"
+                        >
+                          <Link to="/data">View Details</Link>
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <Button asChild variant="outline" className="w-full mt-6">
+                  <Link to="/alerts" className="flex items-center gap-2">
+                    View Complete Alert History
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -347,3 +308,5 @@ export default function Index() {
     </div>
   );
 }
+
+import { Phone } from "lucide-react";

@@ -1,0 +1,342 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  Thermometer,
+  Wind,
+  Droplet,
+  Radio,
+  MapPin,
+  Clock,
+  AlertTriangle,
+  TrendingUp,
+} from "lucide-react";
+
+export default function DataReports() {
+  // Sensor data over time
+  const temperatureData = [
+    { time: "00:00", temp: 22 },
+    { time: "02:00", temp: 24 },
+    { time: "04:00", temp: 28 },
+    { time: "06:00", temp: 35 },
+    { time: "08:00", temp: 42 },
+    { time: "10:00", temp: 45 },
+    { time: "12:00", temp: 48 },
+  ];
+
+  const sensorComparison = [
+    {
+      sensor: "Temp °C",
+      sector_a: 45,
+      sector_b: 38,
+      sector_c: 32,
+    },
+    {
+      sensor: "Humidity %",
+      sector_a: 15,
+      sector_b: 22,
+      sector_c: 35,
+    },
+    {
+      sensor: "Wind km/h",
+      sector_a: 28,
+      sector_b: 22,
+      sector_c: 18,
+    },
+    {
+      sensor: "AQI",
+      sector_a: 850,
+      sector_b: 620,
+      sector_c: 410,
+    },
+  ];
+
+  const fireLocations = [
+    {
+      id: 1,
+      name: "Northern Ridge Fire",
+      lat: "40.7128",
+      lon: "-74.0060",
+      intensity: "High",
+      area: "2.5 km²",
+      progress: "35% contained",
+      startTime: "06:30 AM",
+      reportedBy: "Automated Sensor Network",
+    },
+    {
+      id: 2,
+      name: "Downtown Structure Fire",
+      lat: "40.7580",
+      lon: "-73.9855",
+      intensity: "Medium",
+      area: "0.15 km²",
+      progress: "Fire department on scene",
+      startTime: "11:45 AM",
+      reportedBy: "Emergency Call Center",
+    },
+    {
+      id: 3,
+      name: "East Valley Brush Fire",
+      lat: "40.6892",
+      lon: "-74.1445",
+      intensity: "Medium",
+      area: "1.2 km²",
+      progress: "Contained",
+      startTime: "09:15 AM",
+      reportedBy: "Community Alert System",
+    },
+  ];
+
+  const detailedSensorData = [
+    {
+      location: "Sector A1 (Critical Zone)",
+      sensors: [
+        { name: "Temperature", value: "45°C", status: "Critical", trend: "↑ Rising" },
+        { name: "Humidity", value: "15%", status: "Critical", trend: "↓ Falling" },
+        { name: "Wind Speed", value: "28 km/h", status: "High", trend: "→ Stable" },
+        { name: "Smoke Density", value: "850 AQI", status: "Critical", trend: "↑ Increasing" },
+        { name: "Pressure", value: "992 mb", status: "Normal", trend: "↓ Falling" },
+        { name: "Visibility", value: "150 m", status: "Critical", trend: "↓ Decreasing" },
+      ],
+    },
+    {
+      location: "Sector B2 (Secondary Zone)",
+      sensors: [
+        { name: "Temperature", value: "38°C", status: "High", trend: "↑ Rising" },
+        { name: "Humidity", value: "22%", status: "Low", trend: "↓ Falling" },
+        { name: "Wind Speed", value: "22 km/h", status: "High", trend: "→ Stable" },
+        { name: "Smoke Density", value: "620 AQI", status: "High", trend: "↑ Increasing" },
+        { name: "Pressure", value: "993 mb", status: "Normal", trend: "→ Stable" },
+        { name: "Visibility", value: "400 m", status: "Limited", trend: "↓ Decreasing" },
+      ],
+    },
+    {
+      location: "Sector C3 (Perimeter Zone)",
+      sensors: [
+        { name: "Temperature", value: "32°C", status: "Elevated", trend: "↑ Rising" },
+        { name: "Humidity", value: "35%", status: "Normal", trend: "→ Stable" },
+        { name: "Wind Speed", value: "18 km/h", status: "Normal", trend: "↓ Falling" },
+        { name: "Smoke Density", value: "410 AQI", status: "Moderate", trend: "→ Stable" },
+        { name: "Pressure", value: "995 mb", status: "Normal", trend: "→ Stable" },
+        { name: "Visibility", value: "800 m", status: "Good", trend: "→ Stable" },
+      ],
+    },
+  ];
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Critical":
+        return "bg-red-500/20 text-red-600 border border-red-500/30";
+      case "High":
+        return "bg-orange-500/20 text-orange-600 border border-orange-500/30";
+      case "Elevated":
+        return "bg-yellow-500/20 text-yellow-600 border border-yellow-500/30";
+      case "Limited":
+        return "bg-yellow-500/20 text-yellow-600 border border-yellow-500/30";
+      default:
+        return "bg-green-500/20 text-green-600 border border-green-500/30";
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+
+      {/* Page Header */}
+      <section className="py-8 md:py-12 bg-gradient-to-br from-primary/5 to-secondary/5 border-b border-border">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Data & Reports
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            Real-time sensor data, fire coordinates, and comprehensive alert information
+          </p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="py-12">
+        <div className="container mx-auto px-4 space-y-12">
+          {/* Fire Locations with Coordinates */}
+          <div>
+            <h2 className="text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <MapPin size={28} className="text-primary" />
+              Active Fire Locations
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {fireLocations.map((fire) => (
+                <div
+                  key={fire.id}
+                  className="p-6 bg-card rounded-lg border-2 border-primary/30 hover:border-primary/50 transition-colors"
+                >
+                  <h3 className="text-xl font-bold text-foreground mb-4">
+                    {fire.name}
+                  </h3>
+                  <div className="space-y-3 mb-4">
+                    <div className="p-3 bg-background rounded-lg border border-border">
+                      <p className="text-xs text-muted-foreground">Latitude</p>
+                      <p className="font-mono font-bold text-primary">{fire.lat}°N</p>
+                    </div>
+                    <div className="p-3 bg-background rounded-lg border border-border">
+                      <p className="text-xs text-muted-foreground">Longitude</p>
+                      <p className="font-mono font-bold text-primary">{fire.lon}°W</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3 bg-background rounded-lg border border-border">
+                        <p className="text-xs text-muted-foreground">Intensity</p>
+                        <p className={`font-semibold ${
+                          fire.intensity === "High" ? "text-red-600" : "text-yellow-600"
+                        }`}>
+                          {fire.intensity}
+                        </p>
+                      </div>
+                      <div className="p-3 bg-background rounded-lg border border-border">
+                        <p className="text-xs text-muted-foreground">Area</p>
+                        <p className="font-semibold text-foreground">{fire.area}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-4 border-t border-border">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Status</span>
+                      <span className="text-sm font-semibold text-foreground">
+                        {fire.progress}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Clock size={14} />
+                      Reported: {fire.startTime}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      By: {fire.reportedBy}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Temperature Trend Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <TrendingUp size={24} className="text-primary" />
+              Temperature Trend (Critical Zone)
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={temperatureData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="time" stroke="#717171" />
+                <YAxis stroke="#717171" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e5e5",
+                  }}
+                />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="temp"
+                  stroke="#ff3300"
+                  strokeWidth={3}
+                  dot={{ fill: "#ff3300", r: 5 }}
+                  name="Temperature (°C)"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Sensor Comparison Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <Radio size={24} className="text-primary" />
+              Sensor Data by Sector
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={sensorComparison}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="sensor" stroke="#717171" />
+                <YAxis stroke="#717171" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e5e5",
+                  }}
+                />
+                <Legend />
+                <Bar dataKey="sector_a" fill="#ff3300" name="Sector A (Critical)" />
+                <Bar dataKey="sector_b" fill="#f78000" name="Sector B (Secondary)" />
+                <Bar dataKey="sector_c" fill="#90ee90" name="Sector C (Perimeter)" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Detailed Sensor Data Tables */}
+          <div>
+            <h2 className="text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <Thermometer size={28} className="text-primary" />
+              Detailed Sensor Readings
+            </h2>
+            <div className="space-y-6">
+              {detailedSensorData.map((sector, idx) => (
+                <div
+                  key={idx}
+                  className="bg-card p-6 rounded-lg border border-border overflow-x-auto"
+                >
+                  <h3 className="text-xl font-bold text-foreground mb-4">
+                    {sector.location}
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {sector.sensors.map((sensor, i) => (
+                      <div
+                        key={i}
+                        className={`p-4 rounded-lg ${getStatusColor(sensor.status)}`}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="font-semibold text-sm">{sensor.name}</p>
+                          <span className="text-xs font-bold px-2 py-1 bg-white/20 rounded">
+                            {sensor.trend}
+                          </span>
+                        </div>
+                        <p className="text-2xl font-bold">{sensor.value}</p>
+                        <p className="text-xs opacity-80">Status: {sensor.status}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Alert Summary */}
+          <div className="bg-primary/10 border-2 border-primary/30 p-8 rounded-lg">
+            <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <AlertTriangle size={24} className="text-primary" />
+              Report Summary
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-card p-4 rounded-lg">
+                <p className="text-muted-foreground text-sm mb-1">Total Active Fires</p>
+                <p className="text-3xl font-bold text-primary">3</p>
+              </div>
+              <div className="bg-card p-4 rounded-lg">
+                <p className="text-muted-foreground text-sm mb-1">Total Area Affected</p>
+                <p className="text-3xl font-bold text-primary">3.85 km²</p>
+              </div>
+              <div className="bg-card p-4 rounded-lg">
+                <p className="text-muted-foreground text-sm mb-1">Critical Zones</p>
+                <p className="text-3xl font-bold text-red-600">1</p>
+              </div>
+              <div className="bg-card p-4 rounded-lg">
+                <p className="text-muted-foreground text-sm mb-1">Response Status</p>
+                <p className="text-3xl font-bold text-primary">Active</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
