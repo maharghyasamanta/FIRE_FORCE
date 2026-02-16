@@ -20,7 +20,15 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex flex-col items-center justify-center px-4">
+    <div
+      className="min-h-screen flex flex-col items-center justify-center px-4 relative"
+      style={{
+        backgroundImage: "url(https://68.media.tumblr.com/242a0a97d5cd02da42566f4188b91b61/tumblr_olw61orgq11snbyiqo1_540.gif)",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-20" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl opacity-20" />
@@ -32,12 +40,12 @@ export default function Login() {
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white">
               <AlertTriangle size={24} />
             </div>
-            <span className="text-foreground">FireAlert</span>
+            <span className="text-white">FireAlert</span>
           </Link>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+          <h1 className="text-3xl md:text-4xl font-bold text-white border border-white mb-2 p-2">
             Welcome Back
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-white">
             Sign in to access your emergency alerts
           </p>
         </div>
@@ -143,7 +151,9 @@ export default function Login() {
         {/* Sign Up Link */}
         <div className="text-center mt-6">
           <p className="text-muted-foreground">
-            Don't have an account?{" "}
+            <div className="text-white">
+              Don't have an account?
+            </div>
             <a href="#" className="text-primary hover:text-primary/90 font-semibold transition-colors">
               Sign up here
             </a>
@@ -151,8 +161,8 @@ export default function Login() {
         </div>
 
         {/* Security Notice */}
-        <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-          <p className="text-xs text-muted-foreground text-center">
+        <div className="mt-6 p-4 bg-white/5 border border-primary/20 rounded-lg">
+          <p className="text-xs text-center border border-red-900 p-2" style={{ color: "rgba(107, 78, 78, 1)" }}>
             🔒 Your login credentials are encrypted and secure. FireAlert uses industry-standard security protocols.
           </p>
         </div>
