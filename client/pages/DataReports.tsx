@@ -93,6 +93,15 @@ export default function DataReports() {
     { time: "10:00", gas_a: 850, gas_b: 620, gas_c: 410 },
   ];
 
+  const ultrasonicSensorData = [
+    { time: "00:00", distance_a: 15.2, distance_b: 25.8, distance_c: 35.5 },
+    { time: "02:00", distance_a: 12.8, distance_b: 22.5, distance_c: 33.2 },
+    { time: "04:00", distance_a: 9.5, distance_b: 18.3, distance_c: 28.9 },
+    { time: "06:00", distance_a: 6.8, distance_b: 14.2, distance_c: 24.5 },
+    { time: "08:00", distance_a: 3.9, distance_b: 8.7, distance_c: 18.2 },
+    { time: "10:00", distance_a: 2.3, distance_b: 4.7, distance_c: 8.9 },
+  ];
+
   const fireLocations = [
     {
       id: 1,
@@ -384,6 +393,32 @@ export default function DataReports() {
                 <Line type="monotone" dataKey="gas_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
                 <Line type="monotone" dataKey="gas_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
                 <Line type="monotone" dataKey="gas_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Ultrasonic Sensor Data Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+              <Waves size={24} className="text-primary" />
+              Ultrasonic Sensor - Distance to Fire Front (meters)
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={ultrasonicSensorData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="time" stroke="#717171" />
+                <YAxis stroke="#717171" label={{ value: "Distance (m)", angle: -90, position: "insideLeft" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "1px solid #e5e5e5",
+                  }}
+                  formatter={(value) => `${value.toFixed(1)}m`}
+                />
+                <Legend />
+                <Line type="monotone" dataKey="distance_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                <Line type="monotone" dataKey="distance_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                <Line type="monotone" dataKey="distance_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
               </LineChart>
             </ResponsiveContainer>
           </div>
