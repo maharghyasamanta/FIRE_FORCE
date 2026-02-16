@@ -10,6 +10,11 @@ import {
   Clock,
   AlertTriangle,
   TrendingUp,
+  Waves,
+  Zap,
+  Flame,
+  Eye,
+  Navigation,
 } from "lucide-react";
 
 export default function DataReports() {
@@ -89,36 +94,36 @@ export default function DataReports() {
 
   const detailedSensorData = [
     {
-      location: "Sector A1 (Critical Zone)",
+      location: "Sensor Array - Sector A1 (Critical Zone)",
       sensors: [
-        { name: "Temperature", value: "45°C", status: "Critical", trend: "↑ Rising" },
-        { name: "Humidity", value: "15%", status: "Critical", trend: "↓ Falling" },
-        { name: "Wind Speed", value: "28 km/h", status: "High", trend: "→ Stable" },
-        { name: "Smoke Density", value: "850 AQI", status: "Critical", trend: "↑ Increasing" },
-        { name: "Pressure", value: "992 mb", status: "Normal", trend: "↓ Falling" },
-        { name: "Visibility", value: "150 m", status: "Critical", trend: "↓ Decreasing" },
+        { name: "GPS Sensor", value: "40.7128°N, 74.0060°W", status: "Critical", trend: "🔴 Active Tracking" },
+        { name: "IR Sensor (Infrared)", value: "2450K", status: "Critical", trend: "↑ Extreme Heat Detected" },
+        { name: "Flame Sensor", value: "98.5% Confidence", status: "Critical", trend: "🔥 Flame Detected" },
+        { name: "Gas Sensor (CO/CO2)", value: "850 ppm", status: "Critical", trend: "↑ Toxic Levels" },
+        { name: "Temperature Sensor", value: "45°C", status: "Critical", trend: "↑ Rising Rapidly" },
+        { name: "Ultrasonic Sensor", value: "2.3 meters", status: "Critical", trend: "⚠️ Close Distance" },
       ],
     },
     {
-      location: "Sector B2 (Secondary Zone)",
+      location: "Sensor Array - Sector B2 (Secondary Zone)",
       sensors: [
-        { name: "Temperature", value: "38°C", status: "High", trend: "↑ Rising" },
-        { name: "Humidity", value: "22%", status: "Low", trend: "↓ Falling" },
-        { name: "Wind Speed", value: "22 km/h", status: "High", trend: "→ Stable" },
-        { name: "Smoke Density", value: "620 AQI", status: "High", trend: "↑ Increasing" },
-        { name: "Pressure", value: "993 mb", status: "Normal", trend: "→ Stable" },
-        { name: "Visibility", value: "400 m", status: "Limited", trend: "↓ Decreasing" },
+        { name: "GPS Sensor", value: "40.7580°N, 73.9855°W", status: "High", trend: "🟡 Monitoring" },
+        { name: "IR Sensor (Infrared)", value: "1850K", status: "High", trend: "↑ High Heat" },
+        { name: "Flame Sensor", value: "67.3% Confidence", status: "High", trend: "⚠️ Potential Flame" },
+        { name: "Gas Sensor (CO/CO2)", value: "620 ppm", status: "High", trend: "→ Elevated" },
+        { name: "Temperature Sensor", value: "38°C", status: "High", trend: "↑ Rising" },
+        { name: "Ultrasonic Sensor", value: "4.7 meters", status: "Normal", trend: "→ Stable Distance" },
       ],
     },
     {
-      location: "Sector C3 (Perimeter Zone)",
+      location: "Sensor Array - Sector C3 (Perimeter Zone)",
       sensors: [
-        { name: "Temperature", value: "32°C", status: "Elevated", trend: "↑ Rising" },
-        { name: "Humidity", value: "35%", status: "Normal", trend: "→ Stable" },
-        { name: "Wind Speed", value: "18 km/h", status: "Normal", trend: "↓ Falling" },
-        { name: "Smoke Density", value: "410 AQI", status: "Moderate", trend: "→ Stable" },
-        { name: "Pressure", value: "995 mb", status: "Normal", trend: "→ Stable" },
-        { name: "Visibility", value: "800 m", status: "Good", trend: "→ Stable" },
+        { name: "GPS Sensor", value: "40.6892°N, 74.1445°W", status: "Elevated", trend: "🟢 Standby" },
+        { name: "IR Sensor (Infrared)", value: "1200K", status: "Elevated", trend: "→ Moderate Heat" },
+        { name: "Flame Sensor", value: "22.1% Confidence", status: "Normal", trend: "✓ No Flame" },
+        { name: "Gas Sensor (CO/CO2)", value: "410 ppm", status: "Moderate", trend: "→ Normal" },
+        { name: "Temperature Sensor", value: "32°C", status: "Elevated", trend: "↑ Slightly Rising" },
+        { name: "Ultrasonic Sensor", value: "8.9 meters", status: "Good", trend: "→ Safe Distance" },
       ],
     },
   ];
@@ -271,12 +276,15 @@ export default function DataReports() {
             </ResponsiveContainer>
           </div>
 
-          {/* Detailed Sensor Data Tables */}
+          {/* Advanced Sensor Data Tables */}
           <div>
-            <h2 className="text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Thermometer size={28} className="text-primary" />
-              Detailed Sensor Readings
+            <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <Zap size={28} className="text-primary" />
+              Advanced Sensor Network Data
             </h2>
+            <p className="text-muted-foreground mb-6">
+              Real-time data from multi-spectrum sensors including GPS tracking, infrared thermography, flame detection, gas monitoring, temperature sensing, and ultrasonic distance measurement across all active fire zones.
+            </p>
             <div className="space-y-6">
               {detailedSensorData.map((sector, idx) => (
                 <div
@@ -305,6 +313,74 @@ export default function DataReports() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Sensor Information Guide */}
+          <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-primary/20 p-8 rounded-lg">
+            <h2 className="text-2xl font-bold text-foreground mb-6">
+              Sensor Technology Guide
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-card p-4 rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Navigation size={20} className="text-primary" />
+                  <h3 className="font-semibold text-foreground">GPS Sensor</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Provides precise geographic coordinates (latitude/longitude) for fire location tracking and real-time position updates.
+                </p>
+              </div>
+
+              <div className="bg-card p-4 rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Eye size={20} className="text-primary" />
+                  <h3 className="font-semibold text-foreground">IR Sensor</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Infrared thermal imaging sensor detects heat signatures and measures surface temperatures in Kelvin (K).
+                </p>
+              </div>
+
+              <div className="bg-card p-4 rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Flame size={20} className="text-primary" />
+                  <h3 className="font-semibold text-foreground">Flame Sensor</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Detects visible flames and fire presence with confidence percentage. Uses UV/IR wavelength detection.
+                </p>
+              </div>
+
+              <div className="bg-card p-4 rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Zap size={20} className="text-primary" />
+                  <h3 className="font-semibold text-foreground">Gas Sensor</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Monitors toxic gases (CO/CO2) in parts per million (ppm). Critical for evaluating air quality and hazard levels.
+                </p>
+              </div>
+
+              <div className="bg-card p-4 rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Thermometer size={20} className="text-primary" />
+                  <h3 className="font-semibold text-foreground">Temperature Sensor</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Measures ambient air temperature in Celsius. Tracks environmental heat changes and fire progression.
+                </p>
+              </div>
+
+              <div className="bg-card p-4 rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Waves size={20} className="text-primary" />
+                  <h3 className="font-semibold text-foreground">Ultrasonic Sensor</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Measures distance to fire front and obstacles in meters. Used for safety perimeter establishment.
+                </p>
+              </div>
             </div>
           </div>
 
