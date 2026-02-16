@@ -212,7 +212,14 @@ export default function Index() {
 
             {/* RIGHT SIDE - Current Fire Alerts */}
             <div className="lg:col-span-2">
-              <div className="bg-card rounded-lg border border-border p-6">
+              <div
+                className="bg-card rounded-lg border border-border p-6"
+                style={{
+                  width: "800px",
+                  height: "1000px",
+                  overflow: "auto",
+                }}
+              >
                 <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
                   <Flame size={24} className="text-primary" />
                   Active Fire Alerts
