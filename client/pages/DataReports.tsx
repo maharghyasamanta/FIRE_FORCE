@@ -267,38 +267,142 @@ export default function DataReports() {
             </div>
           </div>
 
-          {/* Temperature Trend Chart */}
-          <div className="bg-card p-6 rounded-lg border border-border">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <TrendingUp size={24} className="text-primary" />
-              Temperature Trend (Critical Zone)
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={temperatureData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="time" stroke="#717171" />
-                <YAxis stroke="#717171" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #e5e5e5",
-                  }}
-                />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="temp"
-                  stroke="#ff3300"
-                  strokeWidth={3}
-                  dot={{ fill: "#ff3300", r: 5 }}
-                  name="Temperature (°C)"
-                />
-              </LineChart>
-            </ResponsiveContainer>
+          {/* Sensor Charts Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Flame Sensor Data Chart */}
+            <div className="bg-card p-6 rounded-lg border border-border">
+              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <Flame size={20} className="text-primary" />
+                Flame Sensor - Fire Detection Confidence (%)
+              </h2>
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={flameSensorData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                  <XAxis dataKey="time" stroke="#717171" />
+                  <YAxis stroke="#717171" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e5e5",
+                    }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="flame_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                  <Line type="monotone" dataKey="flame_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                  <Line type="monotone" dataKey="flame_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Temperature Trend Chart */}
+            <div className="bg-card p-6 rounded-lg border border-border">
+              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <TrendingUp size={20} className="text-primary" />
+                Temperature Trend (Critical Zone)
+              </h2>
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={temperatureData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                  <XAxis dataKey="time" stroke="#717171" />
+                  <YAxis stroke="#717171" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e5e5",
+                    }}
+                  />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="temp"
+                    stroke="#ff3300"
+                    strokeWidth={2}
+                    dot={{ fill: "#ff3300", r: 4 }}
+                    name="Temperature (°C)"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Gas Sensor Data Chart */}
+            <div className="bg-card p-6 rounded-lg border border-border">
+              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <Zap size={20} className="text-primary" />
+                Gas Sensor - Toxic Gas Levels (ppm)
+              </h2>
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={gasSensorData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                  <XAxis dataKey="time" stroke="#717171" />
+                  <YAxis stroke="#717171" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e5e5",
+                    }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="gas_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                  <Line type="monotone" dataKey="gas_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                  <Line type="monotone" dataKey="gas_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* IR Sensor Data Chart */}
+            <div className="bg-card p-6 rounded-lg border border-border">
+              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <Eye size={20} className="text-primary" />
+                IR Sensor (Infrared) - Thermal Detection (Kelvin)
+              </h2>
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={irSensorData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                  <XAxis dataKey="time" stroke="#717171" />
+                  <YAxis stroke="#717171" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e5e5",
+                    }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="ir_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                  <Line type="monotone" dataKey="ir_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                  <Line type="monotone" dataKey="ir_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Ultrasonic Sensor Data Chart */}
+            <div className="bg-card p-6 rounded-lg border border-border lg:col-span-2">
+              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <Waves size={20} className="text-primary" />
+                Ultrasonic Sensor - Distance to Fire Front (meters)
+              </h2>
+              <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={ultrasonicSensorData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                  <XAxis dataKey="time" stroke="#717171" />
+                  <YAxis stroke="#717171" label={{ value: "Distance (m)", angle: -90, position: "insideLeft" }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e5e5",
+                    }}
+                    formatter={(value) => `${value.toFixed(1)}m`}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="distance_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
+                  <Line type="monotone" dataKey="distance_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
+                  <Line type="monotone" dataKey="distance_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
-          {/* Sensor Comparison Chart */}
-          <div className="bg-card p-6 rounded-lg border border-border">
+          {/* Multi-Sensor Comparison Chart */}
+          <div className="bg-card p-6 rounded-lg border border-border mt-6">
             <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
               <Radio size={24} className="text-primary" />
               Multi-Sensor Comparison by Sector
@@ -319,107 +423,6 @@ export default function DataReports() {
                 <Bar dataKey="sector_b" fill="#f78000" name="Sector B (Secondary)" />
                 <Bar dataKey="sector_c" fill="#90ee90" name="Sector C (Perimeter)" />
               </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* IR Sensor Data Chart */}
-          <div className="bg-card p-6 rounded-lg border border-border">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Eye size={24} className="text-primary" />
-              IR Sensor (Infrared) - Thermal Detection (Kelvin)
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={irSensorData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="time" stroke="#717171" />
-                <YAxis stroke="#717171" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #e5e5e5",
-                  }}
-                />
-                <Legend />
-                <Line type="monotone" dataKey="ir_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
-                <Line type="monotone" dataKey="ir_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
-                <Line type="monotone" dataKey="ir_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Flame Sensor Data Chart */}
-          <div className="bg-card p-6 rounded-lg border border-border">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Flame size={24} className="text-primary" />
-              Flame Sensor - Fire Detection Confidence (%)
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={flameSensorData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="time" stroke="#717171" />
-                <YAxis stroke="#717171" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #e5e5e5",
-                  }}
-                />
-                <Legend />
-                <Line type="monotone" dataKey="flame_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
-                <Line type="monotone" dataKey="flame_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
-                <Line type="monotone" dataKey="flame_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Gas Sensor Data Chart */}
-          <div className="bg-card p-6 rounded-lg border border-border">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Zap size={24} className="text-primary" />
-              Gas Sensor - Toxic Gas Levels (ppm)
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={gasSensorData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="time" stroke="#717171" />
-                <YAxis stroke="#717171" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #e5e5e5",
-                  }}
-                />
-                <Legend />
-                <Line type="monotone" dataKey="gas_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
-                <Line type="monotone" dataKey="gas_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
-                <Line type="monotone" dataKey="gas_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Ultrasonic Sensor Data Chart */}
-          <div className="bg-card p-6 rounded-lg border border-border">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Waves size={24} className="text-primary" />
-              Ultrasonic Sensor - Distance to Fire Front (meters)
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={ultrasonicSensorData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="time" stroke="#717171" />
-                <YAxis stroke="#717171" label={{ value: "Distance (m)", angle: -90, position: "insideLeft" }} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #e5e5e5",
-                  }}
-                  formatter={(value) => `${value.toFixed(1)}m`}
-                />
-                <Legend />
-                <Line type="monotone" dataKey="distance_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
-                <Line type="monotone" dataKey="distance_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
-                <Line type="monotone" dataKey="distance_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
-              </LineChart>
             </ResponsiveContainer>
           </div>
 
