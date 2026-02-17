@@ -6,13 +6,13 @@ import {
   AlertCircle,
   Bell,
   Thermometer,
-  Wind,
   Droplet,
   Radio,
   Flame,
   MapPin,
   Clock,
   Activity,
+  Phone,
 } from "lucide-react";
 
 export default function Index() {
@@ -35,14 +35,6 @@ export default function Index() {
     },
     {
       id: 3,
-      name: "Wind Speed",
-      value: "28 km/h",
-      icon: Wind,
-      status: "High",
-      location: "Sector B2",
-    },
-    {
-      id: 4,
       name: "Smoke Density",
       value: "850 AQI",
       icon: Radio,
@@ -325,5 +317,3 @@ export default function Index() {
     </div>
   );
 }
-
-import { Phone } from "lucide-react";
