@@ -46,9 +46,9 @@ export default function Login() {
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white">
               <AlertTriangle size={24} />
             </div>
-            <span className="text-white">FireAlert</span>
+            <span style={{ color: "rgba(255, 0, 0, 1)" }}>FireAlert</span>
           </Link>
-          <h1 className="text-3xl md:text-4xl font-bold text-white border border-white mb-2 p-2">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 p-2" style={{ color: "rgba(103, 28, 229, 1)", borderColor: "rgba(103, 28, 229, 1)" }} style={{ borderWidth: "0.666667px" }}>
             Welcome Back
           </h1>
           <p className="text-white">
