@@ -54,33 +54,33 @@ export default function Index() {
   const currentAlerts = [
     {
       id: 1,
-      title: "Wildfire Alert",
+      title: "Fire Alert Detected",
       location: "Northern Ridge Area",
       severity: "High",
       description: "Active fire spreading rapidly, evacuation recommended",
-      distance: "2.5 km away",
+      distance: "0.5 km away",
       coordinates: "40.7128°N, 74.0060°W",
       status: "Active",
     },
     {
       id: 2,
-      title: "Structure Fire",
+      title: "Fire Alert Detected",
       location: "Downtown District",
       severity: "Medium",
       description: "Fire department responding to commercial building",
-      distance: "5.3 km away",
+      distance: "3 km away",
       coordinates: "40.7580°N, 73.9855°W",
       status: "Responding",
     },
     {
       id: 3,
-      title: "Brush Fire",
-      location: "East Valley",
+      title: "Fire Alert Detected",
+      location: "Downtown District",
       severity: "Medium",
-      description: "Fire contained to brushland, monitoring in progress",
-      distance: "8.1 km away",
-      coordinates: "40.6892°N, 74.1445°W",
-      status: "Contained",
+      description: "Fire department responding to commercial building",
+      distance: "3 km away",
+      coordinates: "40.7580°N, 73.9855°W",
+      status: "Responding",
     },
   ];
 
@@ -225,6 +225,15 @@ export default function Index() {
                   <Flame size={24} className="text-primary" />
                   Active Fire Alerts
                 </h2>
+
+                {/* Emergency Button Section */}
+                <div className="mb-6 p-5 rounded-lg border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+                  <section className="flex flex-col">
+                    <div className="flex flex-col">
+                      <h1 className="text-2xl font-bold text-foreground">EMERGENCY BUTTON</h1>
+                    </div>
+                  </section>
+                </div>
 
                 <div className="space-y-4">
                   {currentAlerts.map((alert) => (
