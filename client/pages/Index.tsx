@@ -151,25 +151,6 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Emergency Switch Section */}
-              <div className="bg-gradient-to-br from-red-500/10 to-primary/10 rounded-lg border-2 border-primary/40 p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
-                    <AlertCircle size={18} className="text-red-600 animate-pulse" />
-                    Emergency Access
-                  </h3>
-                </div>
-                <p className="text-xs text-muted-foreground mb-4">
-                  Quick access to active fire alerts and emergency information
-                </p>
-                <Button asChild className="w-full bg-red-600 hover:bg-red-700 text-white font-bold animate-pulse">
-                  <Link to="/alerts" className="flex items-center justify-center gap-2">
-                    <Flame size={16} />
-                    View Fire Alerts
-                  </Link>
-                </Button>
-              </div>
-
               {/* Sensors Section */}
               <div className="bg-card rounded-lg border border-border p-6">
                 <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
@@ -224,7 +205,7 @@ export default function Index() {
             {/* RIGHT SIDE - Current Fire Alerts */}
             <div className="lg:col-span-2">
               <div
-                className="bg-card rounded-lg border border-border p-6"
+                className="bg-card rounded-lg border border-border p-6 flex flex-col justify-start items-center"
                 style={{
                   width: "800px",
                   height: "800px",
@@ -237,16 +218,24 @@ export default function Index() {
                   Active Fire Alerts
                 </h2>
 
-                {/* Emergency Button Section */}
-                <div className="mb-6 p-5 rounded-lg border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
-                  <section className="flex flex-col">
-                    <div className="flex flex-col">
-                      <h1 className="text-2xl font-bold text-foreground">EMERGENCY BUTTON</h1>
-                    </div>
-                  </section>
+                {/* Emergency Switch Section */}
+                <div className="bg-gradient-to-br from-red-500/10 to-primary/10 rounded-lg border-2 border-primary/40 mt-6 flex flex-col justify-start items-center p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+                      <AlertCircle size={18} className="text-red-600 animate-pulse" />
+                      Emergency Access
+                    </h3>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-4">
+                    Quick access to active fire alerts and emergency information
+                  </p>
+                  <a href="https://ba64c9bbffff4fc184c8cb4afdf4e19c-br-3c0651bd502647f288effc1d3.fly.dev/alerts" className="w-full inline-flex items-center justify-center gap-2 animate-pulse bg-red-600 hover:bg-red-700 text-white font-bold rounded-md px-4 py-2">
+                    <Flame size={16} />
+                    EMERGENCY
+                  </a>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 mt-5 w-full">
                   {currentAlerts.map((alert) => (
                     <div
                       key={alert.id}
