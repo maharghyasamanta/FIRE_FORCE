@@ -23,15 +23,21 @@ export default function Login() {
     <div
       className="min-h-screen flex flex-col items-center justify-center px-4 relative"
       style={{
-        backgroundImage: "url(https://68.media.tumblr.com/242a0a97d5cd02da42566f4188b91b61/tumblr_olw61orgq11snbyiqo1_540.gif)",
+        backgroundImage: "url(https://cdn.builder.io/api/v1/image/assets%2Fb0aeb1dd2c4640d39c4c4ba2cb8ff5a7%2F19b254c0f6844d448e48b50041a32f80)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
     >
       {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-20" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl opacity-20" />
+      <div
+        className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-20"
+        style={{ backgroundColor: "rgba(255, 51, 0, 0.2)" }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20"
+        style={{ backgroundColor: "rgba(240, 120, 0, 0.2)" }}
+      />
 
       <div className="relative z-10 w-full max-w-md">
         {/* Logo Section */}
