@@ -151,6 +151,25 @@ export default function Index() {
                 </div>
               </div>
 
+              {/* Emergency Switch Section */}
+              <div className="bg-gradient-to-br from-red-500/10 to-primary/10 rounded-lg border-2 border-primary/40 p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+                    <AlertCircle size={18} className="text-red-600 animate-pulse" />
+                    Emergency Access
+                  </h3>
+                </div>
+                <p className="text-xs text-muted-foreground mb-4">
+                  Quick access to active fire alerts and emergency information
+                </p>
+                <Button asChild className="w-full bg-red-600 hover:bg-red-700 text-white font-bold animate-pulse">
+                  <Link to="/alerts" className="flex items-center justify-center gap-2">
+                    <Flame size={16} />
+                    View Fire Alerts
+                  </Link>
+                </Button>
+              </div>
+
               {/* Sensors Section */}
               <div className="bg-card rounded-lg border border-border p-6">
                 <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
