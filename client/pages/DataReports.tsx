@@ -269,31 +269,6 @@ export default function DataReports() {
 
           {/* Sensor Charts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Flame Sensor Data Chart */}
-            <div className="bg-card p-6 rounded-lg border border-border">
-              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                <Flame size={20} className="text-primary" />
-                Flame Sensor - Fire Detection Confidence (%)
-              </h2>
-              <ResponsiveContainer width="100%" height={280}>
-                <LineChart data={flameSensorData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                  <XAxis dataKey="time" stroke="#717171" />
-                  <YAxis stroke="#717171" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#fff",
-                      border: "1px solid #e5e5e5",
-                    }}
-                  />
-                  <Legend />
-                  <Line type="monotone" dataKey="flame_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
-                  <Line type="monotone" dataKey="flame_b" stroke="#f78000" strokeWidth={2} name="Sector B (Secondary)" />
-                  <Line type="monotone" dataKey="flame_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-
             {/* Temperature Trend Chart */}
             <div className="bg-card p-6 rounded-lg border border-border">
               <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
