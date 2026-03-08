@@ -235,9 +235,8 @@ export default function DataReports() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="p-3 bg-background rounded-lg border border-border">
                         <p className="text-xs text-muted-foreground">Intensity</p>
-                        <p className={`font-semibold ${
-                          fire.intensity === "High" ? "text-red-600" : "text-yellow-600"
-                        }`}>
+                        <p className={`font-semibold ${fire.intensity === "High" ? "text-red-600" : "text-yellow-600"
+                          }`}>
                           {fire.intensity}
                         </p>
                       </div>
@@ -365,7 +364,7 @@ export default function DataReports() {
                       backgroundColor: "#fff",
                       border: "1px solid #e5e5e5",
                     }}
-                    formatter={(value) => `${value.toFixed(1)}m`}
+                    formatter={(value) => `${(value as number).toFixed(1)}m`}
                   />
                   <Legend />
                   <Line type="monotone" dataKey="distance_a" stroke="#ff3300" strokeWidth={2} name="Sector A (Critical)" />
@@ -373,6 +372,68 @@ export default function DataReports() {
                   <Line type="monotone" dataKey="distance_c" stroke="#90ee90" strokeWidth={2} name="Sector C (Perimeter)" />
                 </LineChart>
               </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* DHT11 Live Sensor Data from ThingSpeak */}
+          <div>
+            <h2 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+              <Thermometer size={28} className="text-primary" />
+              DHT11 Live Sensor — ThingSpeak Cloud
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Real-time temperature and humidity readings from the DHT11 sensor streamed via ThingSpeak IoT platform.
+            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Temperature Live Chart */}
+              <div className="bg-card p-6 rounded-lg border-2 border-primary/30 hover:border-primary/50 transition-colors">
+                <div className="flex items-center gap-2 mb-4">
+                  <Thermometer size={20} className="text-primary" />
+                  <h3 className="text-xl font-bold text-foreground">Live Temperature (°C)</h3>
+                  <span className="ml-auto flex items-center gap-1 text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse inline-block"></span>
+                    LIVE
+                  </span>
+                </div>
+                <div className="rounded-lg overflow-hidden border border-border">
+                  <iframe
+                    width="100%"
+                    height="260"
+                    style={{ border: "none", display: "block" }}
+                    src="https://thingspeak.com/channels/3252166/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=DHT11&type=line&xaxis=Time"
+                    title="DHT11 Temperature - ThingSpeak"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground mt-3 flex items-center gap-1">
+                  <Clock size={12} />
+                  Auto-refreshes every 15 seconds · Source: ThingSpeak Channel 3252166
+                </p>
+              </div>
+
+              {/* Humidity Live Chart */}
+              <div className="bg-card p-6 rounded-lg border-2 border-primary/30 hover:border-primary/50 transition-colors">
+                <div className="flex items-center gap-2 mb-4">
+                  <Droplet size={20} className="text-primary" />
+                  <h3 className="text-xl font-bold text-foreground">Live Humidity (%)</h3>
+                  <span className="ml-auto flex items-center gap-1 text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse inline-block"></span>
+                    LIVE
+                  </span>
+                </div>
+                <div className="rounded-lg overflow-hidden border border-border">
+                  <iframe
+                    width="100%"
+                    height="260"
+                    style={{ border: "none", display: "block" }}
+                    src="https://thingspeak.com/channels/3252166/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=DHT11&type=line&xaxis=Time"
+                    title="DHT11 Humidity - ThingSpeak"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground mt-3 flex items-center gap-1">
+                  <Clock size={12} />
+                  Auto-refreshes every 15 seconds · Source: ThingSpeak Channel 3252166
+                </p>
+              </div>
             </div>
           </div>
 
